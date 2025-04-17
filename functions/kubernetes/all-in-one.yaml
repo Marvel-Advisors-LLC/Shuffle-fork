@@ -88,9 +88,10 @@ data:
   SSO_REDIRECT_URL: ""
   TZ: "Europe/Amsterdam \t\t\t\t\t"
   IS_KUBERNETES: "true"
-  REGISTRY_URL: "docker-registry:5000"
+  REGISTRY_URL: "ghcr.io"
   REGISTRY_AUTH: "false"
   SHUFFLE_KUBERNETES_WORKER: "ghcr.io/shuffle/shuffle-worker:nightly"
+  WORKFLOW_RUNNER_SERVICEACCOUNT: "shuffle-sa"  
 kind: ConfigMap
 
 ---
@@ -884,6 +885,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SHUFFLE_MEMCACHED
+                  name: env
+            - name: WORKFLOW_RUNNER_SERVICEACCOUNT
+              valueFrom:
+                configMapKeyRef:
+                  key: WORKFLOW_RUNNER_SERVICEACCOUNT                  
                   name: env
           image: ghcr.io/shuffle/shuffle-orborus:nightly
           #imagePullPolicy: Never

@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1 #extensions/v1beta1
+kind: Ingress
+metadata:
+  name: "shuffle-ingress"
+  namespace: "shuffle"
+  annotations:
+    alb.ingress.kubernetes.io/scheme: 'internet-facing'
+    alb.ingress.kubernetes.io/target-type: 'ip'
+    alb.ingress.kubernetes.io/group.name: 'soc-marvelad-ingress-group'
+    alb.ingress.kubernetes.io/load-balancer-name: 'alb-shared'
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/certificate-arn: 'arn:aws:acm:us-east-1:590183765660:certificate/98339085-4581-41ab-a059-7fc9c4d8db2c'
+    alb.ingress.kubernetes.io/ssl-policy: 'ELBSecurityPolicy-TLS13-1-2-2021-06'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    external-dns.alpha.kubernetes.io/hostname: shuffle.siem-marvelad.com
+  labels:
+    app: 'shuffle'
+spec:
+  ingressClassName: 'alb'
+  rules:
+  - host: 'shuffle.siem-marvelad.com'
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service: 
+            name: "frontend"
+            port: 
+              number: 80
