@@ -20,8 +20,12 @@ kind: StorageClass
 metadata:
   name: shuffle-data
   namespace: shuffle
-provisioner: kubernetes.io/no-provisioner
+provisioner: kubernetes.io/aws-ebs
+parameters:
+  encrypted: 'true'
+  type: gp3
 volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Delete
 
 ---
 
@@ -88,10 +92,9 @@ data:
   SSO_REDIRECT_URL: ""
   TZ: "Europe/Amsterdam \t\t\t\t\t"
   IS_KUBERNETES: "true"
-  REGISTRY_URL: "ghcr.io"
+  REGISTRY_URL: "docker.io"
   REGISTRY_AUTH: "false"
   SHUFFLE_KUBERNETES_WORKER: "ghcr.io/shuffle/shuffle-worker:nightly"
-  WORKFLOW_RUNNER_SERVICEACCOUNT: "shuffle-sa"  
 kind: ConfigMap
 
 ---
@@ -160,7 +163,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard-rwo
+  storageClassName: shuffle-data
   resources:
     requests:
       storage: 500Mi
@@ -314,7 +317,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard-rwo
+  storageClassName: shuffle-data
   resources:
     requests:
       storage: 5Gi
@@ -333,7 +336,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: standard-rwo
+  storageClassName: shuffle-data
   resources:
     requests:
       storage: 5Gi
@@ -885,11 +888,6 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: SHUFFLE_MEMCACHED
-                  name: env
-            - name: WORKFLOW_RUNNER_SERVICEACCOUNT
-              valueFrom:
-                configMapKeyRef:
-                  key: WORKFLOW_RUNNER_SERVICEACCOUNT                  
                   name: env
           image: ghcr.io/shuffle/shuffle-orborus:nightly
           #imagePullPolicy: Never
