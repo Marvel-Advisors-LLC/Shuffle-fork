@@ -39,7 +39,7 @@ metadata:
 data:
   BACKEND_HOSTNAME: shuffle-backend
   BACKEND_PORT: "5001"
-  BASE_URL: http://shuffle-backend:5001
+  BASE_URL: http://shuffle-backend.shuffle.svc.cluster.local:5001
   DATASTORE_EMULATOR_HOST: shuffle-database:8000
   DB_LOCATION: /mnt/shuffle-data/open-search
   DOCKER_API_VERSION: "1.40"
@@ -95,6 +95,7 @@ data:
   REGISTRY_URL: "docker.io"
   REGISTRY_AUTH: "false"
   SHUFFLE_KUBERNETES_WORKER: "ghcr.io/shuffle/shuffle-worker:nightly"
+  SHUFFLE_OVERRIDE_BASE_URL: http://shuffle-backend.shuffle.svc.cluster.local:5001
 kind: ConfigMap
 
 ---
@@ -166,7 +167,7 @@ spec:
   storageClassName: shuffle-data
   resources:
     requests:
-      storage: 500Mi
+      storage: 30Gi
 status: {}
 
 ---

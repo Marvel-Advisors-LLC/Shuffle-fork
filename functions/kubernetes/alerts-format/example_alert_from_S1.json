@@ -1,0 +1,56 @@
+{
+    "severity": 3,
+    "pretext": "WAZUH Alert",
+    "title": "SentinelOne: New active threat \\Device\\HarddiskVolume3\\Users\\zbartunek\\Downloads\\Ahk2Exe112207\\Ahk2Exe.exe detected on COZBARTUNEK02.",
+    "text": "May 19 10:26:20 52.4.126.188 2025-05-19 16:26:20,170   sentinel -  CEF:0|SentinelOne|Mgmt|S-25.1.5#259|19|New active threat - machine COZBARTUNEK02|1|osName=Windows 10 Pro rt=2025-05-19 16:25:39.182384 fileHash=6be59b1b81a7b0b7dde727aed217ffcac9864396 filePath=\\Device\\HarddiskVolume3\\Users\\zbartunek\\Downloads\\Ahk2Exe112207\\Ahk2Exe.exe cat=SystemEvent activityID=2218309833396604891 activityType=19 siteId=726934389678363121 siteName=Default site accountId=726934389661585904 accountName=Rise Broadband notificationScope=SITE",
+    "rule_id": "105002",
+    "timestamp": "2025-05-29T12:25:35.765+0000",
+    "id": "1748521535.817907",
+    "all_fields": {
+        "timestamp": "2025-05-29T12:25:35.765+0000",
+        "rule": {
+            "level": 10,
+            "description": "SentinelOne: New active threat \\Device\\HarddiskVolume3\\Users\\zbartunek\\Downloads\\Ahk2Exe112207\\Ahk2Exe.exe detected on COZBARTUNEK02.",
+            "id": "105002",
+            "firedtimes": 1,
+            "mail": true,
+            "groups": [
+                "sentinelone"
+            ]
+        },
+        "agent": {
+            "id": "000",
+            "name": "wazuh-manager-worker-0"
+        },
+        "manager": {
+            "name": "wazuh-manager-worker-0"
+        },
+        "id": "1748521535.817907",
+        "cluster": {
+            "name": "wazuh",
+            "node": "wazuh-manager-worker-0"
+        },
+        "full_log": "May 19 10:26:20 52.4.126.188 2025-05-19 16:26:20,170   sentinel -  CEF:0|SentinelOne|Mgmt|S-25.1.5#259|19|New active threat - machine COZBARTUNEK02|1|osName=Windows 10 Pro rt=2025-05-19 16:25:39.182384 fileHash=6be59b1b81a7b0b7dde727aed217ffcac9864396 filePath=\\Device\\HarddiskVolume3\\Users\\zbartunek\\Downloads\\Ahk2Exe112207\\Ahk2Exe.exe cat=SystemEvent activityID=2218309833396604891 activityType=19 siteId=726934389678363121 siteName=Default site accountId=726934389661585904 accountName=Rise Broadband notificationScope=SITE",
+        "predecoder": {
+            "timestamp": "May 19 10:26:20",
+            "hostname": "52.4.126.188"
+        },
+        "decoder": {
+            "name": "sentinelone"
+        },
+        "data": {
+            "log_message1": "New active threat",
+            "log_message2": "New active threat - machine COZBARTUNEK02",
+            "endpoint": "COZBARTUNEK02",
+            "operating_system": "Windows 10 Pro ",
+            "file_hash": "6be59b1b81a7b0b7dde727aed217ffcac9864396",
+            "file_path": "\\Device\\HarddiskVolume3\\Users\\zbartunek\\Downloads\\Ahk2Exe112207\\Ahk2Exe.exe",
+            "activity_id": "2218309833396604891",
+            "site_id": "726934389678363121",
+            "site_name": "Default",
+            "account_id": "726934389661585904",
+            "account_name": "Rise Broadband "
+        },
+        "location": "10.0.117.183"
+    }
+}
