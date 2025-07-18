@@ -1,0 +1,670 @@
+{
+    "org_id": "b37f91db-d43c-405e-bbad-d6e8a73ff250",
+    "org_name": "default",
+    "last_cleared": 0,
+    "daily_statistics": [
+        {
+            "date": "2025-06-26T13:23:38.02130669Z",
+            "app_executions": 11,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 0,
+            "workflow_executions_finished": 0,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 0,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 11,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-06-27T00:20:41.591664198Z",
+            "app_executions": 1121,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 47,
+            "workflow_executions": 122,
+            "workflow_executions_finished": 67,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 131,
+            "ai_executions": 0,
+            "api_usage": 319,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 564,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-06-28T00:04:08.16591786Z",
+            "app_executions": 2248,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 20,
+            "workflow_executions": 270,
+            "workflow_executions_finished": 41,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 260,
+            "ai_executions": 0,
+            "api_usage": 761,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 1688,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-06-29T00:29:13.928034881Z",
+            "app_executions": 2160,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 20,
+            "workflow_executions": 350,
+            "workflow_executions_finished": 50,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 360,
+            "ai_executions": 0,
+            "api_usage": 754,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 2768,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-06-30T00:55:24.435963134Z",
+            "app_executions": 3048,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 40,
+            "workflow_executions": 330,
+            "workflow_executions_finished": 180,
+            "workflow_executions_failed": 101,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 320,
+            "ai_executions": 0,
+            "api_usage": 787,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 4291,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 47,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-01T00:55:24.465420254Z",
+            "app_executions": 3354,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 30,
+            "workflow_executions": 683,
+            "workflow_executions_finished": 507,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 684,
+            "ai_executions": 0,
+            "api_usage": 759,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 5968,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 57,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-02T04:30:28.035704277Z",
+            "app_executions": 1335,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 20,
+            "workflow_executions": 50,
+            "workflow_executions_finished": 40,
+            "workflow_executions_failed": 20,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 60,
+            "ai_executions": 0,
+            "api_usage": 529,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 6635,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 57,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-03T12:03:13.38786999Z",
+            "app_executions": 684,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 10,
+            "workflow_executions": 102,
+            "workflow_executions_finished": 101,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 101,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 6973,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 57,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-04T08:25:42.60247155Z",
+            "app_executions": 459,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 20,
+            "workflow_executions": 50,
+            "workflow_executions_finished": 50,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 50,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 7197,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 57,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-06T12:12:30.522712778Z",
+            "app_executions": 39,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 10,
+            "workflow_executions_finished": 32,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 32,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 7226,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 57,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-07T11:58:23.408493404Z",
+            "app_executions": 940,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 30,
+            "workflow_executions": 169,
+            "workflow_executions_finished": 133,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 143,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 7697,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-08T13:41:15.474959184Z",
+            "app_executions": 548,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 40,
+            "workflow_executions": 60,
+            "workflow_executions_finished": 50,
+            "workflow_executions_failed": 10,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 60,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 7966,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-09T07:11:06.773807059Z",
+            "app_executions": 20,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 20,
+            "workflow_executions_finished": 10,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 10,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 7976,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-10T12:37:25.283040662Z",
+            "app_executions": 1255,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 607,
+            "workflow_executions_finished": 612,
+            "workflow_executions_failed": 0,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 608,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 8597,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-11T00:00:26.990584849Z",
+            "app_executions": 149795,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 51301,
+            "workflow_executions_finished": 5538,
+            "workflow_executions_failed": 38151,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 51766,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 61840,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "app_executions_failed",
+                    "value": 40873,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-12T00:00:07.790422322Z",
+            "app_executions": 288269,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 99399,
+            "workflow_executions_finished": 12273,
+            "workflow_executions_failed": 71159,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 100315,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 163885,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "app_executions_failed",
+                    "value": 119210,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-13T00:00:04.993308432Z",
+            "app_executions": 310849,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 104364,
+            "workflow_executions_finished": 12582,
+            "workflow_executions_failed": 77123,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 104188,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 273115,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "app_executions_failed",
+                    "value": 205550,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-14T00:00:14.614332448Z",
+            "app_executions": 326095,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 106454,
+            "workflow_executions_finished": 10965,
+            "workflow_executions_failed": 83333,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 108452,
+            "ai_executions": 0,
+            "api_usage": 0,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 388049,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "app_executions_failed",
+                    "value": 296785,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        },
+        {
+            "date": "2025-07-15T00:00:04.59309031Z",
+            "app_executions": 298948,
+            "child_app_executions": 0,
+            "app_executions_failed": 0,
+            "subflow_executions": 0,
+            "workflow_executions": 105737,
+            "workflow_executions_finished": 10307,
+            "workflow_executions_failed": 84102,
+            "org_sync_actions": 0,
+            "cloud_executions": 0,
+            "onprem_executions": 105875,
+            "ai_executions": 0,
+            "api_usage": 140,
+            "app_usage": null,
+            "additions": [
+                {
+                    "key": "app_executions_shuffle",
+                    "value": 494755,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_success_create_ticket",
+                    "value": 77,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "categorylabel_fail_create_ticket",
+                    "value": 10,
+                    "date": "0001-01-01T00:00:00Z"
+                },
+                {
+                    "key": "app_executions_failed",
+                    "value": 378205,
+                    "date": "0001-01-01T00:00:00Z"
+                }
+            ]
+        }
+    ],
+    "total_app_executions": 1548495,
+    "total_child_app_executions": 0,
+    "total_app_executions_failed": 0,
+    "total_subflow_executions": 277,
+    "total_workflow_executions": 524349,
+    "total_workflow_executions_finished": 58419,
+    "total_workflow_executions_failed": 404677,
+    "total_org_sync_actions": 0,
+    "total_cloud_executions": 0,
+    "total_onprem_executions": 527755,
+    "total_ai_executions": 0,
+    "monthly_api_usage": 1598,
+    "monthly_app_executions": 1539907,
+    "monthly_subflow_executions": 150,
+    "monthly_workflow_executions": 523277,
+    "monthly_workflow_executions_finished": 58081,
+    "monthly_workflow_executions_failed": 404576,
+    "monthly_onprem_executions": 526684,
+    "weekly_app_executions": 157317,
+    "weekly_workflow_executions": 54271,
+    "weekly_workflow_executions_finished": 4881,
+    "weekly_workflow_executions_failed": 50678,
+    "weekly_onprem_executions": 54340,
+    "daily_app_executions": 157317,
+    "daily_child_app_executions": 0,
+    "daily_app_executions_failed": 0,
+    "daily_subflow_executions": 0,
+    "daily_workflow_executions": 54271,
+    "daily_workflow_executions_finished": 4881,
+    "daily_workflow_executions_failed": 50678,
+    "daily_org_sync_actions": 0,
+    "daily_cloud_executions": 0,
+    "daily_onprem_executions": 54340,
+    "daily_ai_executions": 0,
+    "hourly_app_executions": 157317,
+    "hourly_workflow_executions": 54271,
+    "hourly_workflow_executions_finished": 4881,
+    "hourly_workflow_executions_failed": 50678,
+    "hourly_onprem_executions": 54340,
+    "total_api_usage": 4219,
+    "daily_api_usage": 170,
+    "additions": [
+        {
+            "key": "app_executions_shuffle",
+            "value": 552499,
+            "daily_value": 57744,
+            "date": "0001-01-01T00:00:00Z"
+        },
+        {
+            "key": "categorylabel_success_create_ticket",
+            "value": 77,
+            "date": "0001-01-01T00:00:00Z"
+        },
+        {
+            "key": "categorylabel_fail_create_ticket",
+            "value": 10,
+            "date": "0001-01-01T00:00:00Z"
+        },
+        {
+            "key": "app_executions_failed",
+            "value": 420737,
+            "daily_value": 42532,
+            "date": "0001-01-01T00:00:00Z"
+        }
+    ],
+    "last_monthly_reset_month": 7
+}

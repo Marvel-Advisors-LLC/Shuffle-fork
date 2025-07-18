@@ -94,7 +94,7 @@ data:
   IS_KUBERNETES: "true"
   REGISTRY_URL: "docker.io"
   REGISTRY_AUTH: "false"
-  SHUFFLE_KUBERNETES_WORKER: "ghcr.io/shuffle/shuffle-worker:nightly"
+  SHUFFLE_KUBERNETES_WORKER: "ghcr.io/shuffle/shuffle-worker:2.1.0-rc2"
   SHUFFLE_OVERRIDE_BASE_URL: http://shuffle-backend.shuffle.svc.cluster.local:5001
 kind: ConfigMap
 
@@ -432,6 +432,11 @@ spec:
                 configMapKeyRef:
                   key: BACKEND_HOSTNAME
                   name: env
+            - name: SHUFFLE_OVERRIDE_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: env
+                  key: SHUFFLE_OVERRIDE_BASE_URL       
             - name: BACKEND_PORT
               valueFrom:
                 configMapKeyRef:
@@ -707,7 +712,7 @@ spec:
                 configMapKeyRef:
                   key: REGISTRY_AUTH
                   name: env
-          image: ghcr.io/shuffle/shuffle-backend:nightly
+          image: ghcr.io/shuffle/shuffle-backend:2.1.0-rc2
           imagePullPolicy: Always
           name: shuffle-backend
           ports:
@@ -774,7 +779,7 @@ spec:
     spec:
       containers:
         - name: shuffle-frontend
-          image: ghcr.io/shuffle/shuffle-frontend:nightly
+          image: ghcr.io/shuffle/shuffle-frontend:2.1.0-rc2
           env:
             - name: BACKEND_HOSTNAME
               valueFrom:
@@ -858,13 +863,13 @@ spec:
             - name: ORG_ID
               value: Shuffle
             - name: SHUFFLE_APP_SDK_VERSION
-              value: nightly
+              value: 2.1.0-rc2
             - name: SHUFFLE_SCALE_REPLICAS
               value: "5"
             - name: SHUFFLE_SWARM_CONFIG
               value: run
             - name: SHUFFLE_WORKER_VERSION
-              value: nightly
+              value: 2.1.0-rc2
             - name: IS_KUBERNETES
               valueFrom:
                 configMapKeyRef:
@@ -890,7 +895,7 @@ spec:
                 configMapKeyRef:
                   key: SHUFFLE_MEMCACHED
                   name: env
-          image: ghcr.io/shuffle/shuffle-orborus:nightly
+          image: ghcr.io/shuffle/shuffle-orborus:2.1.0-rc2
           #imagePullPolicy: Never
           name: shuffle-orborus
           resources: {}
