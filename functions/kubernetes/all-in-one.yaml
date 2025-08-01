@@ -79,12 +79,10 @@ data:
   SHUFFLE_OPENSEARCH_CLOUDID: ""
   KUBERNETES_NAMESPACE: shuffle
   SHUFFLE_OPENSEARCH_INDEX_PREFIX: ""
-  SHUFFLE_OPENSEARCH_PASSWORD: admin
   SHUFFLE_OPENSEARCH_PROXY: ""
   SHUFFLE_OPENSEARCH_SKIPSSL_VERIFY: "true"
   SHUFFLE_OPENSEARCH_URL: https://opensearch:9200
   SHUFFLE_MEMCACHED: shuffle-memcached:11211
-  SHUFFLE_OPENSEARCH_USERNAME: admin
   SHUFFLE_ORBORUS_STARTUP_DELAY: "\t\t"
   SHUFFLE_PASS_APP_PROXY: "FALSE"
   SHUFFLE_PASS_WORKER_PROXY: "TRUE"
@@ -239,14 +237,22 @@ spec:
             - containerPort: 9200
           resources: {}
           volumeMounts:
-            - mountPath: /usr/share/opensearch/data
-              name: opensearch-claim0
+            - name: opensearch-claim0
+              mountPath: /usr/share/opensearch/data
+            - name: opensearch-internal-users
+              mountPath: /usr/share/opensearch/config/opensearch-security/internal_users.yml
+              subPath: internal_users.yml
+              readOnly: true              
       hostname: shuffle-opensearch
       restartPolicy: Always
       volumes:
         - name: opensearch-claim0
           persistentVolumeClaim:
             claimName: opensearch-claim0
+        - name: opensearch-internal-users
+          configMap:
+            name: opensearch-internal-users
+
 status: {}
 
 ---
@@ -644,9 +650,9 @@ spec:
                   name: env
             - name: SHUFFLE_OPENSEARCH_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: SHUFFLE_OPENSEARCH_PASSWORD
-                  name: env
+                  name: shuffle-backend-secrets
             - name: SHUFFLE_OPENSEARCH_PROXY
               valueFrom:
                 configMapKeyRef:
@@ -664,9 +670,9 @@ spec:
                   name: env
             - name: SHUFFLE_OPENSEARCH_USERNAME
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: SHUFFLE_OPENSEARCH_USERNAME
-                  name: env
+                  name: shuffle-backend-secrets
             - name: SHUFFLE_ORBORUS_STARTUP_DELAY
               valueFrom:
                 configMapKeyRef:
@@ -902,3 +908,68 @@ spec:
       hostname: shuffle-orborus
       restartPolicy: Always
 status: {}
+
+---
+
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: apply-ism-policy
+spec:
+  schedule: "0 0 */3 * *"  # Every 3 days at midnight
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: apply-ism
+            image: curlimages/curl:latest
+            command:
+            - sh
+            - -c
+            - |
+              echo "Checking if policy exists..."
+              POLICY=$(curl -s -u admin:admin -k -o /dev/null -w "%{http_code}" https://opensearch:9200/_plugins/_ism/policies/delete-old-indices)
+
+              if [ "$POLICY" -eq 404 ]; then
+                echo "Policy not found. Creating it..."
+                curl -u admin:admin -k -X PUT "https://opensearch:9200/_plugins/_ism/policies/delete-old-indices" \
+                  -H 'Content-Type: application/json' \
+                  -d '{
+                    "policy": {
+                      "description": "Delete indices older than 3 days",
+                      "default_state": "hot",
+                      "states": [
+                        {
+                          "name": "hot",
+                          "actions": [],
+                          "transitions": [
+                            {
+                              "state_name": "delete",
+                              "conditions": {
+                                "min_index_age": "3d"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "name": "delete",
+                          "actions": [
+                            {
+                              "delete": {}
+                            }
+                          ],
+                          "transitions": []
+                        }
+                      ]
+                    }
+                  }'
+              else
+                echo "Policy already exists."
+              fi
+
+              echo "Applying policy to 'workflowexecution' index..."
+              curl -u admin:admin -k -X PUT "https://opensearch:9200/workflowexecution/_settings" \
+                -H "Content-Type: application/json" \
+                -d '{"index.plugins.index_state_management.policy_id": "delete-old-indices"}'
+          restartPolicy: OnFailure
