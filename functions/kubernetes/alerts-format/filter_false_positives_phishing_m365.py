@@ -56,6 +56,16 @@ trusted_domain = "dal1-imap.risebroadband.com"
 trusted_recipients_known = ["support"]
 trusted_recipients_potential = ["info", "billing", "copyright", "enterprisesupport"]
 
+# Destinatarios específicos a descartar siempre
+obsolete_accounts = [
+    "jjacobs@jabbroadband.mail.onmicrosoft.com",
+    "kdegnan@jabbroadband.mail.onmicrosoft.com",
+    "dlivingston@jabbroadband.mail.onmicrosoft.com",
+    "mmessmer@jabbroadband.mail.onmicrosoft.com",
+    "zlewis@jabbroadband.mail.onmicrosoft.com",
+    "mmillar@jabbroadband.mail.onmicrosoft.com"
+]
+
 # Evaluar si se debe descartar
 if sender in allowed_senders:
     print(json.dumps({
@@ -71,6 +81,12 @@ if any(keyword in subject for keyword in subject_keywords_to_skip):
     }))
     exit()
 
+if recipient in obsolete_accounts:
+    print(json.dumps({
+        "skip_alert": True,
+        "debug_recipient": recipient
+    }))
+    exit()
 
 # Validar destinatario
 if recipient.endswith(f"@{trusted_domain}"):

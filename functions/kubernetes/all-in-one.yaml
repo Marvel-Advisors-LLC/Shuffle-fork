@@ -914,62 +914,34 @@ status: {}
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: apply-ism-policy
+  namespace: shuffle
+  name: delete-workflowexecution-index
 spec:
-  schedule: "0 0 */3 * *"  # Every 3 days at midnight
+  schedule: "0 0 */3 * *"  # Cada 3 días a medianoche
   jobTemplate:
     spec:
       template:
         spec:
           containers:
-          - name: apply-ism
+          - name: delete-index
             image: curlimages/curl:latest
+            imagePullPolicy: Always
+            env:
+            - name: OPENSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: opensearch-credentials
+                  key: username
+            - name: OPENSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: opensearch-credentials
+                  key: password
             command:
             - sh
             - -c
             - |
-              echo "Checking if policy exists..."
-              POLICY=$(curl -s -u admin:admin -k -o /dev/null -w "%{http_code}" https://opensearch:9200/_plugins/_ism/policies/delete-old-indices)
-
-              if [ "$POLICY" -eq 404 ]; then
-                echo "Policy not found. Creating it..."
-                curl -u admin:admin -k -X PUT "https://opensearch:9200/_plugins/_ism/policies/delete-old-indices" \
-                  -H 'Content-Type: application/json' \
-                  -d '{
-                    "policy": {
-                      "description": "Delete indices older than 3 days",
-                      "default_state": "hot",
-                      "states": [
-                        {
-                          "name": "hot",
-                          "actions": [],
-                          "transitions": [
-                            {
-                              "state_name": "delete",
-                              "conditions": {
-                                "min_index_age": "3d"
-                              }
-                            }
-                          ]
-                        },
-                        {
-                          "name": "delete",
-                          "actions": [
-                            {
-                              "delete": {}
-                            }
-                          ],
-                          "transitions": []
-                        }
-                      ]
-                    }
-                  }'
-              else
-                echo "Policy already exists."
-              fi
-
-              echo "Applying policy to 'workflowexecution' index..."
-              curl -u admin:admin -k -X PUT "https://opensearch:9200/workflowexecution/_settings" \
-                -H "Content-Type: application/json" \
-                -d '{"index.plugins.index_state_management.policy_id": "delete-old-indices"}'
+              echo "🧹 Deleting 'workflowexecution' index in OpenSearch"
+              curl -u "${OPENSEARCH_USERNAME}:${OPENSEARCH_PASSWORD}" -k -X DELETE "https://opensearch:9200/workflowexecution"
           restartPolicy: OnFailure
+

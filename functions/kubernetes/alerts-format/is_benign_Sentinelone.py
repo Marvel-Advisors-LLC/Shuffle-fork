@@ -14,7 +14,8 @@ benign_phrases = [
     "Kill performed successfully",
     "Quarantine performed successfully",
     "Threat Killed By Policy",
-    "User Issued Kill Command"
+    "User Issued Kill Command",
+    "Network quarantine performed successfully"
 ]
 
 # 5) Evaluación (match exacto)
