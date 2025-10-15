@@ -1,25 +1,70 @@
 import json
+import re
+import unicodedata
 
 # Cargamos el JSON original del nodo inicial
 raw = r"""$create_startnode"""
 data = json.loads(raw)
 
-# Accedemos a all_fields como en el primer filtro
+def clean_text(s):
+    """Quita espacios extremos, normaliza unicode y elimina caracteres de control invisibles."""
+    if s is None:
+        return ""
+    # Normalizar (NFKC) y convertir a str
+    t = str(s)
+    t = unicodedata.normalize("NFKC", t)
+    # eliminar caracteres de control excepto \n\r\t si hubiera (opcionales)
+    t = re.sub(r'[\x00-\x1f\x7f]', '', t)
+    return t.strip()
+
+# Accedemos a all_fields
 fields = data.get("all_fields", {})
 
-# Extraemos los campos de interés
-sender = fields.get("data", {}).get("office365", {}).get("P2Sender", "").strip().lower()
-subject = fields.get("data", {}).get("office365", {}).get("Subject", "").strip().lower()
-# Primero intenta con RecipientEmailAddress
-recipient = fields.get("data", {}).get("office365", {}).get("RecipientEmailAddress", "")
-# Si está vacío, intenta con el primer elemento de la lista Recipients
-if not recipient:
-    recipients_list = fields.get("data", {}).get("office365", {}).get("Recipients", [])
-    recipient = recipients_list[0].strip().lower() if recipients_list else ""
-else:
-    recipient = recipient.strip().lower()
+# Campos principales de Office365
+office365_data = fields.get("data", {}).get("office365", {})
 
-# Lista blanca de remitentes
+# Campos importantes
+sender = clean_text(fields.get("data", {}).get("office365", {}).get("P2Sender", "")).lower()
+subject = clean_text(fields.get("data", {}).get("office365", {}).get("Subject", "")).lower()
+
+# Intentamos distintas keys posibles para destinatarios
+recipient_field = (
+    fields.get("data", {}).get("office365", {}).get("RecipientEmailAddress")
+    or fields.get("data", {}).get("office365", {}).get("Recipients")
+    or fields.get("data", {}).get("office365", {}).get("Recipient_List")
+    or ""
+)
+
+# Si es lista, unimos con coma para procesar; si no, convertimos a string
+if isinstance(recipient_field, list):
+    recipient_raw = ", ".join(str(x) for x in recipient_field)
+else:
+    recipient_raw = str(recipient_field)
+
+recipient_raw = clean_text(recipient_raw).lower()
+
+# Extraer todas las direcciones de email con regex robusta
+emails = re.findall(r'([A-Za-z0-9!#$%&\'*+\-/=?^_`{|}~\.]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,})', recipient_raw)
+
+# Si no extrajimos nada, intentamos limpiar caracteres comunes y volver a intentar
+if not emails and recipient_raw:
+    fallback = re.sub(r'[<>"\[\]\(\)]', '', recipient_raw)
+    emails = re.findall(r'([A-Za-z0-9!#$%&\'*+\-/=?^_`{|}~\.]+@[A-Za-z0-9\.\-]+\.[A-Za-z]{2,})', fallback)
+
+
+# === extraer AuthDetails si existen ===
+auth_details_raw = office365_data.get("AuthDetails", [])
+auth_details = {}
+if isinstance(auth_details_raw, list):
+    for item in auth_details_raw:
+        name = item.get("Name")
+        value = item.get("Value")
+        if name:
+            auth_details[clean_text(name)] = clean_text(value)
+
+
+
+# Reglas / listas
 allowed_senders = [
     "workflow@jabbroadband.local",
     "no-reply@secure-directory.net-link-secure.com",
@@ -34,71 +79,69 @@ allowed_senders = [
     "info@culliganquench.com"
 ]
 
-# Palabras clave de campañas legítimas o simulaciones
 subject_keywords_to_skip = [
-    "gift card",
-    "keep training",
-    "free meal coupon",
-    "exclusive offers",
-    "maximize",
-    "softteco",
-    "reply with",
-    "webinar",
-    "cloud",
-    "postgre",
-    "training"
+    "gift card","keep training","free meal coupon","exclusive offers",
+    "maximize","softteco","reply with","webinar","cloud","postgre","training"
 ]
 
-# Dominio confiable
 trusted_domain = "dal1-imap.risebroadband.com"
-
-# Destinatarios explícitamente confiables
 trusted_recipients_known = ["support"]
-trusted_recipients_potential = ["info", "billing", "copyright", "enterprisesupport"]
+trusted_recipients_potential = ["info","billing","copyright","enterprisesupport"]
 
-# Destinatarios específicos a descartar siempre
-obsolete_accounts = [
-    "jjacobs@jabbroadband.mail.onmicrosoft.com",
-    "kdegnan@jabbroadband.mail.onmicrosoft.com",
-    "dlivingston@jabbroadband.mail.onmicrosoft.com",
-    "mmessmer@jabbroadband.mail.onmicrosoft.com",
-    "zlewis@jabbroadband.mail.onmicrosoft.com",
-    "mmillar@jabbroadband.mail.onmicrosoft.com"
-]
+# Debug inicial para ver qué está llegando (usa repr para ver caracteres invisibles)
+debug = {
+    "recipient_field_raw_repr": repr(recipient_field),
+    "recipient_raw_repr": repr(recipient_raw),
+    "emails_extracted": emails,
+    "sender": sender,
+    "subject": subject,
+    "auth_details": auth_details,
+    "UserKey": clean_text(office365_data.get("UserKey", "")),
+    "ObjectId": clean_text(office365_data.get("ObjectId", "")),
+    "Operation": clean_text(office365_data.get("Operation", "")),
+    "Workload": clean_text(office365_data.get("Workload", "")),
+    "ResultStatus": clean_text(office365_data.get("ResultStatus", "")),
+    "RecordType": clean_text(office365_data.get("RecordType", "")),
+    "CreationTime": clean_text(office365_data.get("CreationTime", "")),
+    "Id": clean_text(office365_data.get("Id", ""))
+}
 
-# Evaluar si se debe descartar
-if sender in allowed_senders:
-    print(json.dumps({
-        "skip_alert": True,
-        "debug_recipient": recipient
-    }))
+# 1) Sender en whitelist
+if sender and sender in allowed_senders:
+    debug["reason"] = "allowed_sender"
+    print(json.dumps({"skip_alert": True, "debug": debug}))
     exit()
 
-if any(keyword in subject for keyword in subject_keywords_to_skip):
-    print(json.dumps({
-        "skip_alert": True,
-        "debug_recipient": recipient
-    }))
+# 2) Subject contiene keywords a saltar
+if subject and any(k in subject for k in subject_keywords_to_skip):
+    debug["reason"] = "subject_keyword"
+    print(json.dumps({"skip_alert": True, "debug": debug}))
     exit()
 
-if recipient in obsolete_accounts:
-    print(json.dumps({
-        "skip_alert": True,
-        "debug_recipient": recipient
-    }))
-    exit()
+# 3) Evaluar cada email extraído
+trusted_domain_clean = clean_text(trusted_domain).lower()
+for e in emails:
+    e_clean = clean_text(e).lower()
+    if "@" not in e_clean:
+        continue
+    local_part, domain = e_clean.split("@", 1)
+    domain_clean = domain.strip().lower().rstrip(".")
 
-# Validar destinatario
-if recipient.endswith(f"@{trusted_domain}"):
-    local_part = recipient.split("@")[0]
-    if any(local_part.startswith(p) for p in trusted_recipients_known + trusted_recipients_potential):
-        print(json.dumps({
-            "skip_alert": True,
-            "debug_recipient": recipient
-        }))
+    debug["testing_email"] = e_clean
+    debug["domain_clean"] = domain_clean
+    debug["trusted_domain_clean"] = trusted_domain_clean
+
+    if trusted_domain_clean in domain_clean:
+        debug.update({
+            "matched_email": e_clean,
+            "local_part": local_part,
+            "domain": domain_clean,
+            "reason": "domain_match_any_localpart"
+        })
+        print(json.dumps({"skip_alert": True, "debug": debug}))
         exit()
 
-print(json.dumps({
-    "skip_alert": False,
-    "debug_recipient": recipient
-}))
+
+# No se descartó
+debug["reason"] = "not_matched"
+print(json.dumps({"skip_alert": False, "debug": debug}))
