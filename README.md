@@ -30,7 +30,6 @@ To view the examples, go to `../Shuffle-fork/functions/kubernetes/alerts-format/
 
 We have a cronjob that runs every three days to delete the workflow memory, as it can grow too large and cause issues with Shuffle's persistent volumes (PVs). Make sure this cronjob is always running! You can find the code in `Shuffle-fork/functions/kubernetes/all-in-one.yaml` under the name `delete-workflowexecution-index`.
 
-![Example Shuffle webhook integration](https://github.com/shuffle/Shuffle/blob/main/frontend/src/assets/img/github_shuffle_img.png)
 
 ## Try it
 * Self-hosted: Check out the [installation guide](https://github.com/shuffle/shuffle/blob/master/.github/install-guide.md)
