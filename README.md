@@ -11,10 +11,24 @@ Shuffle Automation
 
 </h4>
 
+## Risebroadband workflow (SOC)
+
+
+![Risebroadband SOC Workflow](images/SOC.png)  
+
+You can use the pre-built workflow for Rise. Simply download the JSON file containing the workflow from the Google Drive folder: `"Marvel Documents -> Backups -> Shuffle-workflow"`.  
+Once you have the file, go to your Shuffle instance, navigate to "Org Workflows" -> "Import Workflow", and paste the JSON content.
+
+
 ## How to use test alerts  
 
-If you go to `../Shuffle-fork/functions/kubernetes/alerts-format/example_input_alerts.txt` you'll see different examples  
-of alerts that usually arrives from Rise Broadband.
+We have created some test alerts that you can use to test the SOC workflow. These alerts simulate real incidents without needing to trigger actual alerts from Wazuh.  
+To view the examples, go to `../Shuffle-fork/functions/kubernetes/alerts-format/example_input_alerts.txt`, where you will find different sample alerts typically received from Rise Broadband.  
+
+
+## Cronjob   
+
+We have a cronjob that runs every three days to delete the workflow memory, as it can grow too large and cause issues with Shuffle's persistent volumes (PVs). Make sure this cronjob is always running! You can find the code in `Shuffle-fork/functions/kubernetes/all-in-one.yaml` under the name `delete-workflowexecution-index`.
 
 ![Example Shuffle webhook integration](https://github.com/shuffle/Shuffle/blob/main/frontend/src/assets/img/github_shuffle_img.png)
 
