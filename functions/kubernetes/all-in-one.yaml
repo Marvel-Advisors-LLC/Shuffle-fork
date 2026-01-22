@@ -909,39 +909,5 @@ spec:
       restartPolicy: Always
 status: {}
 
----
 
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  namespace: shuffle
-  name: delete-workflowexecution-index
-spec:
-  schedule: "0 0 */3 * *"  # Cada 3 días a medianoche
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          containers:
-          - name: delete-index
-            image: curlimages/curl:latest
-            imagePullPolicy: Always
-            env:
-            - name: OPENSEARCH_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: opensearch-credentials
-                  key: username
-            - name: OPENSEARCH_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: opensearch-credentials
-                  key: password
-            command:
-            - sh
-            - -c
-            - |
-              echo "🧹 Deleting 'workflowexecution' index in OpenSearch"
-              curl -u "${OPENSEARCH_USERNAME}:${OPENSEARCH_PASSWORD}" -k -X DELETE "https://opensearch:9200/workflowexecution"
-          restartPolicy: OnFailure
 
